@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oriana Campeona - Regalos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --rojo:#d71920; --rojo2:#7b0610; --negro:#050507; --negro2:#111116;
+      --blanco:#fff8ef; --gris:rgba(255,248,239,.72); --dorado:#f7c957;
+      --celeste:#78b7e5; --borde:rgba(255,255,255,.14);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh; color: var(--blanco); font-family: Montserrat, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(215,25,32,.38), transparent 30%),
+        radial-gradient(circle at 84% 20%, rgba(120,183,229,.22), transparent 28%),
+        linear-gradient(140deg, #050507, #170407 50%, #030304);
+      overflow-x: hidden;
+    }
+    body:before {
+      content:""; position:fixed; inset:0; pointer-events:none; opacity:.13;
+      background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: radial-gradient(circle at center, black, transparent 78%);
+    }
+    .wrap { max-width: 1120px; margin: auto; padding: 24px 16px 44px; position: relative; }
+    .hero {
+      position: relative; overflow: hidden; border-radius: 32px; min-height: 410px; padding: 30px;
+      border:1px solid var(--borde);
+      background:
+        linear-gradient(118deg, rgba(215,25,32,.94), rgba(123,6,16,.88) 43%, rgba(5,5,7,.96) 80%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 22px, transparent 22px 44px);
+      box-shadow: 0 28px 90px rgba(0,0,0,.48);
+    }
+    .hero:before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 70% 35%, rgba(255,255,255,.12) 0 2px, transparent 3px); background-size: 42px 42px; opacity:.65; }
+    .top { position:relative; z-index:2; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .badge { border:1px solid rgba(255,255,255,.22); background:rgba(0,0,0,.28); padding:9px 14px; border-radius:999px; font-size:.75rem; text-transform:uppercase; letter-spacing:.08em; font-weight:900; }
+    .title { position:relative; z-index:2; margin-top:44px; max-width: 720px; }
+    .mini { font-family:'Bebas Neue'; color:#d9f1ff; letter-spacing:.18em; font-size: clamp(1.15rem,3vw,1.7rem); }
+    h1 { font-family:'Bebas Neue'; font-size:clamp(4.6rem,14vw,9rem); line-height:.84; text-shadow:0 12px 0 rgba(0,0,0,.22); }
+    h1 span { display:block; color:var(--dorado); }
+    .sub { max-width: 610px; margin-top:18px; color:rgba(255,248,239,.82); line-height:1.6; font-weight:600; }
+    .shirt {
+      position:absolute; right:42px; bottom:38px; width:190px; aspect-ratio:1; z-index:1;
+      border-radius:34px; transform:rotate(-5deg); display:grid; place-items:center;
+      background:linear-gradient(90deg, transparent 0 31%, rgba(255,255,255,.16) 31% 34%, transparent 34% 66%, rgba(255,255,255,.16) 66% 69%, transparent 69%), linear-gradient(160deg,#fff,#e22129 42%,#79050d);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 24px 65px rgba(0,0,0,.44);
+    }
+    .shirt:before { content:"10"; font-family:'Bebas Neue'; font-size:5.3rem; text-shadow:0 6px 0 rgba(0,0,0,.22); }
+    .shirt:after { content:"LA 10 DEL CUMPLE"; position:absolute; bottom:25px; font-size:.68rem; font-weight:900; letter-spacing:.08em; }
+    .stats { position:relative; z-index:3; margin:-38px auto 22px; width:min(980px, calc(100% - 12px)); display:grid; grid-template-columns:repeat(5,1fr); overflow:hidden; border-radius:22px; border:1px solid var(--borde); background:rgba(6,6,9,.82); backdrop-filter:blur(14px); box-shadow:0 18px 70px rgba(0,0,0,.4); }
+    .stat { padding:18px 12px; text-align:center; border-right:1px solid rgba(255,255,255,.1); }
+    .stat:last-child { border-right:0; }
+    .stat b { display:block; font-family:'Bebas Neue'; font-size:2.2rem; color:var(--dorado); }
+    .stat small { font-size:.72rem; font-weight:900; text-transform:uppercase; color:var(--gris); }
+    .panel { border:1px solid var(--borde); border-radius:28px; background:rgba(9,9,14,.86); backdrop-filter:blur(14px); padding:26px; box-shadow:0 22px 70px rgba(0,0,0,.42); }
+    .lock { display:grid; grid-template-columns:1fr 1.4fr; gap:22px; align-items:center; }
+    .var { border:1px solid var(--borde); border-radius:22px; padding:20px; background:linear-gradient(145deg, rgba(215,25,32,.13), rgba(255,255,255,.04)); }
+    h2 { font-family:'Bebas Neue'; letter-spacing:.05em; font-size:2.35rem; color:var(--dorado); }
+    .var p, .access p { color:var(--gris); line-height:1.55; margin-top:8px; }
+    .field { display:grid; grid-template-columns:1fr auto; gap:12px; margin-top:16px; }
+    input { min-width:0; padding:15px 16px; border-radius:15px; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.08); color:white; outline:none; font-size:1rem; font-weight:900; letter-spacing:.08em; }
+    input:focus { border-color:var(--dorado); box-shadow:0 0 0 4px rgba(247,201,87,.12); }
+    button { border:0; border-radius:15px; padding:15px 18px; cursor:pointer; font-family:Montserrat,sans-serif; font-weight:900; letter-spacing:.03em; transition:.18s; }
+    button:hover:not(:disabled) { transform:translateY(-2px); filter:brightness(1.08); }
+    button:disabled { opacity:.4; cursor:not-allowed; transform:none !important; filter:none !important; }
+    .btn-gold { background:linear-gradient(135deg,var(--dorado),#fff0b1); color:#1b0b00; }
+    .btn-red { background:linear-gradient(135deg,var(--rojo),var(--rojo2)); color:white; border:1px solid rgba(255,255,255,.14); }
+    .btn-blue { background:linear-gradient(135deg,var(--celeste),#fff); color:#071525; }
+    .btn-green { background:linear-gradient(135deg,#25D366,#128C7E); color:white; font-size:1.05rem; padding:16px 26px; }
+    .error { display:none; color:#ffb6b6!important; font-weight:800; }
+    .actions { display:none; gap:12px; justify-content:center; flex-wrap:wrap; margin:26px 0 8px; }
+    .actions.show { display:flex; }
+    .lineup { display:none; margin-top:30px; }
+    .lineup.show { display:block; animation:pop .45s ease both; }
+    .section-title { text-align:center; margin-bottom:22px; }
+    .section-title .mini { color:var(--dorado); font-size:1.05rem; }
+    .section-title h2 { color:var(--blanco); font-size:3.1rem; }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+
+    /* Card base */
+    .card { position:relative; min-height:205px; padding:22px; border-radius:22px; border:1px solid rgba(255,255,255,.14); background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.035)); overflow:hidden; cursor:pointer; text-align:left; transition:.18s; }
+    .card:before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 84% 0%, rgba(247,201,87,.22), transparent 36%); opacity:0; transition:.22s; }
+    .card:hover:not(.locked):before, .card.selected:before { opacity:1; }
+    .card.selected { outline:2px solid var(--dorado); background:linear-gradient(145deg, rgba(247,201,87,.18), rgba(215,25,32,.12)); }
+
+    /* Estado bloqueado */
+    .card.locked { cursor:default; opacity:.45; }
+    .card.locked:hover { transform:none; }
+    .card.selected.locked { opacity:1; }
+
+    .num { position:absolute; top:0; left:0; background:linear-gradient(135deg,var(--rojo),var(--rojo2)); padding:8px 13px; border-radius:0 0 15px 0; font-weight:900; }
+    .icon { display:block; font-size:2.7rem; margin:24px 0 12px; }
+    h3 { position:relative; font-family:'Bebas Neue'; font-size:2rem; line-height:1; letter-spacing:.03em; }
+    .card p { position:relative; color:rgba(255,248,239,.72); line-height:1.45; margin-top:10px; font-size:.92rem; }
+
+    /* Panel de resultado */
+    .result { display:none; margin-top:24px; padding:25px; border-radius:25px; border:1px solid rgba(247,201,87,.36); background:linear-gradient(135deg, rgba(247,201,87,.18), rgba(215,25,32,.16)), rgba(0,0,0,.28); text-align:center; }
+    .result.show { display:block; animation:pop .45s ease both; }
+    .result .cup { font-size:3.2rem; }
+    #resultText { margin-top:10px; font-size:1.25rem; font-weight:900; }
+
+    /* Botón confirmar */
+    #confirmArea { display:none; margin-top:20px; text-align:center; }
+    #confirmArea.show { display:block; animation:pop .3s ease both; }
+    #confirmArea p { color:var(--gris); margin-bottom:14px; font-weight:600; font-size:.95rem; }
+
+    /* Confirmado final */
+    #confirmedMsg { display:none; margin-top:20px; padding:22px; border-radius:22px; border:1px solid rgba(37,211,102,.3); background:linear-gradient(135deg, rgba(37,211,102,.12), rgba(18,140,126,.08)); text-align:center; }
+    #confirmedMsg.show { display:block; animation:pop .45s ease both; }
+    #confirmedMsg .check { font-size:2.8rem; margin-bottom:10px; }
+    #confirmedMsg p { color:var(--gris); font-weight:700; line-height:1.55; margin-top:6px; }
+    #confirmedMsg strong { color:var(--dorado); }
+
+    .footer { margin-top:24px; text-align:center; color:rgba(255,255,255,.42); font-size:.78rem; font-weight:800; letter-spacing:.05em; }
+    .confetti { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:99; }
+    .confetti span { position:absolute; top:-22px; width:10px; height:16px; border-radius:3px; animation:fall 1.8s ease-in forwards; }
+    @keyframes fall { to { transform:translateY(110vh) rotate(720deg); opacity:0; } }
+    @keyframes pop { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+    @media (max-width: 860px) { .shirt { width:132px; right:18px; bottom:18px; opacity:.85; } .title { max-width:100%; padding-right:110px; } .hero { min-height:490px; } .stats{grid-template-columns:repeat(2,1fr)} .stat{border-bottom:1px solid rgba(255,255,255,.1)} .lock{grid-template-columns:1fr} .cards{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width: 560px) { .wrap{padding:14px 10px 32px} .hero{padding:22px; border-radius:24px; min-height:510px} .title{padding-right:0} .shirt{position:relative; margin:25px 0 0 auto; right:auto; bottom:auto; width:118px} .field{grid-template-columns:1fr} .cards{grid-template-columns:1fr} .section-title h2{font-size:2.4rem} h1{font-size:5rem} }
+  </style>
+</head>
+<body>
+  <div class="confetti" id="confetti"></div>
+  <main class="wrap">
+    <section class="hero">
+      <div class="top">
+        <div class="badge">🔴 Independiente</div>
+        <div class="badge">🇦🇷 Modo selección</div>
+        <div class="badge">⚽ Cumple edition</div>
+      </div>
+      <div class="title">
+        <div class="mini">Final del mundo: regalos edition</div>
+        <h1>Oriana <span>Campeona</span></h1>
+        <p class="sub">Hoy se juega un partido especial: vos contra una lista de regalos. Primero pasá el VAR familiar y entrá al vestuario.</p>
+      </div>
+      <div class="shirt" aria-label="Camiseta 10"></div>
+    </section>
+
+    <section class="stats">
+      <div class="stat"><b>🏆 1</b><small>Cumpleaños</small></div>
+      <div class="stat"><b>⭐ 1</b><small>Hermano favorito</small></div>
+      <div class="stat"><b>❤️ 99</b><small>Amor rojo</small></div>
+      <div class="stat"><b>🇦🇷 10</b><small>Modo campeona</small></div>
+      <div class="stat"><b>⚽ 24/7</b><small>Fútbol</small></div>
+    </section>
+
+    <section class="panel">
+      <div class="lock" id="lock">
+        <div class="var">
+          <h2>VAR familiar</h2>
+          <p>Para ingresar al vestuario de regalos, respondé:</p>
+          <p><strong>"El DNI de tu mejor hermano"</strong></p>
+        </div>
+        <div class="access">
+          <h2>Ingresá el DNI</h2>
+          <p>Solo la cumpleañera autorizada puede ver la lista oficial.</p>
+          <div class="field" id="field">
+            <input id="dni" type="password" inputmode="numeric" maxlength="8" placeholder="Ej: 44396167" autocomplete="off" />
+            <button class="btn-gold" onclick="validarDni()">Ingresar al vestuario</button>
+          </div>
+          <p class="error" id="error">Ese DNI fue revisado por el VAR y no pasó 😅</p>
+        </div>
+      </div>
+
+      <div class="actions" id="actions">
+        <button class="btn-red" id="btnVerOpciones" onclick="mostrarOpciones()">⚽ Ver opciones</button>
+        <button class="btn-blue" id="btnSortear" onclick="sortearRegalo()">🎲 Sorteo aleatorio</button>
+      </div>
+
+      <div class="lineup" id="lineup">
+        <div class="section-title">
+          <div class="mini">La lista oficial</div>
+          <h2>Elegí tu regalo</h2>
+          <p style="color:var(--gris); line-height:1.5;" id="subtitleCards">Tocá la tarjeta que más te guste o dejá que el azar futbolero decida.</p>
+        </div>
+        <div class="cards" id="cards"></div>
+      </div>
+
+      <!-- Área de confirmación (aparece al seleccionar un regalo) -->
+      <div id="confirmArea">
+        <p>¿Confirmás este regalo? Una vez que lo confirmás, no podés cambiar la elección.</p>
+        <button class="btn-green" onclick="confirmarRegalo()">✅ Sí, confirmo mi regalo</button>
+      </div>
+
+      <!-- Mensaje final post-confirmación -->
+      <div id="confirmedMsg">
+        <div class="check">🏆</div>
+        <p><strong id="confirmedNombre">—</strong></p>
+        <p>Tu elección quedó confirmada. Se va a abrir tu app de correo para enviarle la selección a Rodrigo.</p>
+        <p style="margin-top:10px; font-size:.85rem;">Si el correo no se abrió solo, <a id="mailFallback" href="#" style="color:var(--dorado); font-weight:900;">tocá acá para abrirlo</a>.</p>
+      </div>
+
+    </section>
+
+    <div class="footer">Hecho para Oriana • Que viva el Rojo • Que viva el fútbol • Que viva el cumple 🎂</div>
+  </main>
+
+  <script>
+    const DNI_CORRECTO = '44396167';
+    const EMAIL_DESTINO = 'rodrigoarregin14@gmail.com';
+
+    let regaloPendiente = null;   // regalo seleccionado pero no confirmado
+    let modoSorteo = false;
+    let confirmado = false;       // true cuando el usuario confirmó → bloqueo total
+
+    const regalos = [
+      { icon:'✈️', titulo:'Viaje en avión', desc:'Ida y vuelta. Destino a definir juntos, como corresponde.' },
+      { icon:'🪂', titulo:'Paracaídas', desc:'Una experiencia fuerte, distinta y bien inolvidable.' },
+      { icon:'👗', titulo:'Ropa y zapatos', desc:'Un combo a elección para renovar look sin culpa.' },
+      { icon:'💆‍♀️', titulo:'Día de spa', desc:'Relax, descanso y modo reina activado por unas horas.' },
+      { icon:'🍽️', titulo:'Salida a comer', desc:'El lugar que quieras, con comida rica y brindis incluido.' },
+      { icon:'📸', titulo:'Una foto especial', desc:'Una sesión o un recuerdo especial para guardar para siempre.' },
+      { icon:'🎁', titulo:'Regalo sorpresa', desc:'Algo especial que te va a encantar. Secreto total.' },
+      { icon:'🛍️', titulo:'Shopping sin culpa', desc:'Comprá lo que quieras sin mirar el precio.' }
+    ];
+
+    const cardsContainer = document.getElementById('cards');
+    regalos.forEach((r, i) => {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.dataset.regalo = r.titulo;
+      card.dataset.index = i;
+      card.innerHTML = `<span class="num">${i+1}</span><span class="icon">${r.icon}</span><h3>${r.titulo}</h3><p>${r.desc}</p>`;
+      card.onclick = () => { if (!confirmado) elegirRegalo(card, false); };
+      cardsContainer.appendChild(card);
+    });
+
+    document.getElementById('dni').addEventListener('keydown', e => { if (e.key === 'Enter') validarDni(); });
+
+    function validarDni() {
+      const input = document.getElementById('dni');
+      const error = document.getElementById('error');
+      if (input.value.trim() === DNI_CORRECTO) {
+        error.style.display = 'none';
+        document.getElementById('field').style.display = 'none';
+        document.getElementById('actions').classList.add('show');
+        tirarConfetti();
+      } else {
+        error.style.display = 'block'; input.value = ''; input.focus();
+      }
+    }
+
+    function mostrarOpciones() {
+      document.getElementById('lineup').classList.add('show');
+      document.getElementById('lineup').scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+
+    function sortearRegalo() {
+      if (confirmado) return;
+      mostrarOpciones();
+      ocultarConfirmacion();
+      const all = [...document.querySelectorAll('.card')];
+      all.forEach(c => c.classList.remove('selected'));
+      let vueltas = 0;
+      const elegido = Math.floor(Math.random() * all.length);
+      // Deshabilitar botones durante el sorteo
+      document.getElementById('btnSortear').disabled = true;
+      document.getElementById('btnVerOpciones').disabled = true;
+      const intervalo = setInterval(() => {
+        all.forEach(c => c.classList.remove('selected'));
+        all[vueltas % all.length].classList.add('selected');
+        vueltas++;
+        if (vueltas > 22 + elegido) {
+          clearInterval(intervalo);
+          document.getElementById('btnSortear').disabled = false;
+          document.getElementById('btnVerOpciones').disabled = false;
+          elegirRegalo(all[elegido], true);
+        }
+      }, 95);
+    }
+
+    function elegirRegalo(card, sorteo) {
+      if (confirmado) return;
+      modoSorteo = sorteo;
+      regaloPendiente = card.dataset.regalo;
+
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+
+      // Mostrar área de confirmación
+      const confirmArea = document.getElementById('confirmArea');
+      confirmArea.classList.add('show');
+      confirmArea.scrollIntoView({ behavior:'smooth', block:'center' });
+    }
+
+    function ocultarConfirmacion() {
+      document.getElementById('confirmArea').classList.remove('show');
+      regaloPendiente = null;
+    }
+
+    function confirmarRegalo() {
+      if (!regaloPendiente || confirmado) return;
+      confirmado = true;
+
+      // Bloquear todas las cards
+      document.querySelectorAll('.card').forEach(c => {
+        c.classList.add('locked');
+        c.onclick = null;
+      });
+
+      // Ocultar botones de acción y confirmación
+      document.getElementById('btnSortear').disabled = true;
+      document.getElementById('btnVerOpciones').disabled = true;
+      document.getElementById('confirmArea').classList.remove('show');
+
+      // Actualizar subtitle
+      document.getElementById('subtitleCards').textContent = '¡Elección confirmada! Ya no podés cambiarla. 🔒';
+
+      // Mostrar mensaje final
+      const prefijo = modoSorteo ? '🎲 El azar futbolero eligió: ' : '🏆 Elegiste: ';
+      document.getElementById('confirmedNombre').textContent = prefijo + regaloPendiente;
+      document.getElementById('confirmedMsg').classList.add('show');
+
+      // Preparar y abrir email
+      const asunto = encodeURIComponent('Oriana eligió su regalo 🎁');
+      const cuerpo = encodeURIComponent(
+        `Hola Rodrigo!\n\nOriana eligió: ${regaloPendiente}.\n\nModo de elección: ${modoSorteo ? 'Sorteo aleatorio' : 'Elección manual'}.\n\n🔴⚫🇦🇷`
+      );
+      const mailtoUrl = `mailto:${EMAIL_DESTINO}?subject=${asunto}&body=${cuerpo}`;
+      document.getElementById('mailFallback').href = mailtoUrl;
+
+      tirarConfetti();
+      setTimeout(() => { window.location.href = mailtoUrl; }, 800);
+    }
+
+    function tirarConfetti() {
+      const box = document.getElementById('confetti');
+      box.innerHTML = '';
+      const colores = ['#d71920','#ffffff','#78b7e5','#f7c957','#111111'];
+      for (let i=0; i<54; i++) {
+        const p = document.createElement('span');
+        p.style.left = Math.random()*100 + 'vw';
+        p.style.background = colores[Math.floor(Math.random()*colores.length)];
+        p.style.animationDelay = Math.random()*.35 + 's';
+        p.style.animationDuration = 1.2 + Math.random()*1.2 + 's';
+        p.style.transform = `rotate(${Math.random()*180}deg)`;
+        box.appendChild(p);
+      }
+      setTimeout(() => box.innerHTML = '', 2800);
+    }
+  </script>
+</body>
+</html>
