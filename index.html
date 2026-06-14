@@ -186,6 +186,10 @@
 
       <!-- Área de confirmación (aparece al seleccionar un regalo) -->
       <div id="confirmArea">
+        <div id="avisoViaje" style="display:none; margin-bottom:16px; padding:18px 20px; border-radius:16px; border:1px solid rgba(120,183,229,.35); background:linear-gradient(135deg, rgba(120,183,229,.14), rgba(5,5,7,.4)); text-align:left;">
+          <p style="font-weight:900; color:var(--celeste); font-size:1rem; margin-bottom:6px;">✈️ Info importante sobre este regalo</p>
+          <p style="color:var(--gris); font-size:.93rem; line-height:1.6; margin:0;">El regalador tiene planificado realizar un viaje a la ciudad de <strong style="color:var(--blanco);">Bariloche</strong> el día <strong style="color:var(--blanco);">12 de julio de 2026</strong>, con una probabilidad aproximada del <strong style="color:var(--dorado);">95%</strong>. Tené en cuenta esta información por si deseás sumarte a dicho viaje como parte de tu regalo.</p>
+        </div>
         <p>¿Confirmás este regalo? Una vez que lo confirmás, no podés cambiar la elección.</p>
         <button class="btn-green" onclick="confirmarRegalo()">✅ Sí, confirmo mi regalo</button>
       </div>
@@ -194,8 +198,13 @@
       <div id="confirmedMsg">
         <div class="check">🏆</div>
         <p><strong id="confirmedNombre">—</strong></p>
-        <p>Tu elección quedó confirmada. Se va a abrir tu app de correo para enviarle la selección a Rodrigo.</p>
-        <p style="margin-top:10px; font-size:.85rem;">Si el correo no se abrió solo, <a id="mailFallback" href="#" style="color:var(--dorado); font-weight:900;">tocá acá para abrirlo</a>.</p>
+        <p>Tu elección quedó confirmada. Cuando estés lista, tocá el botón para enviarle tu selección a Rodrigo por WhatsApp.</p>
+        <p style="margin-top:16px;"><a id="mailFallback" href="#" style="display:inline-block; background:linear-gradient(135deg,#25D366,#128C7E); color:white; font-weight:900; padding:14px 26px; border-radius:14px; text-decoration:none; font-size:1rem; letter-spacing:.02em;">💬 Enviar por WhatsApp a Rodrigo</a></p>
+        <div style="margin-top:20px; padding:16px 18px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(0,0,0,.28); text-align:left;">
+          <p style="font-weight:900; color:#ffb6b6; font-size:.92rem; margin-bottom:8px;">⚠️ Aviso importante</p>
+          <p style="color:var(--gris); font-size:.88rem; line-height:1.6; margin-bottom:10px;">El regalo seleccionado aún no ha sido adquirido, dado que la presente herramienta fue creada precisamente para definir cuál sería. Tené esto en cuenta al momento de esperar la entrega de tu obsequio.</p>
+          <p style="color:rgba(255,248,239,.42); font-size:.73rem; line-height:1.55; border-top:1px solid rgba(255,255,255,.1); padding-top:10px;"><strong style="color:rgba(255,248,239,.6);">Términos y condiciones:</strong> La selección de un regalo a través de esta plataforma no implica, garantiza ni confirma su posterior obtención por parte del beneficiario. El regalador se reserva el derecho de modificar, reemplazar o no concretar el obsequio elegido ante cualquier circunstancia imprevista. Al confirmar y enviar el correo electrónico, la beneficiaria declara haber leído, comprendido y aceptado estas condiciones, incluyendo la posibilidad de no recibir regalo alguno en caso de que algo ocurra en el ínterin.</p>
+        </div>
       </div>
 
     </section>
@@ -285,6 +294,9 @@
       document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
       card.classList.add('selected');
 
+      // Mostrar/ocultar aviso de Bariloche
+      document.getElementById('avisoViaje').style.display = (regaloPendiente === 'Viaje en avión') ? 'block' : 'none';
+
       // Mostrar área de confirmación
       const confirmArea = document.getElementById('confirmArea');
       confirmArea.classList.add('show');
@@ -319,16 +331,14 @@
       document.getElementById('confirmedNombre').textContent = prefijo + regaloPendiente;
       document.getElementById('confirmedMsg').classList.add('show');
 
-      // Preparar y abrir email
-      const asunto = encodeURIComponent('Oriana eligió su regalo 🎁');
-      const cuerpo = encodeURIComponent(
-        `Hola Rodrigo!\n\nOriana eligió: ${regaloPendiente}.\n\nModo de elección: ${modoSorteo ? 'Sorteo aleatorio' : 'Elección manual'}.\n\n🔴⚫🇦🇷`
+      // Preparar link de WhatsApp
+      const mensaje = encodeURIComponent(
+        `Hola Rodrigo! 🎁\n\nOriana eligió su regalo: *${regaloPendiente}*\n\nModo de elección: ${modoSorteo ? 'Sorteo aleatorio 🎲' : 'Elección manual 🏆'}\n\n🔴⚫🇦🇷`
       );
-      const mailtoUrl = `mailto:${EMAIL_DESTINO}?subject=${asunto}&body=${cuerpo}`;
+      const mailtoUrl = `https://wa.me/5491124727258?text=${mensaje}`;
       document.getElementById('mailFallback').href = mailtoUrl;
 
       tirarConfetti();
-      setTimeout(() => { window.location.href = mailtoUrl; }, 800);
     }
 
     function tirarConfetti() {
